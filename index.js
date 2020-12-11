@@ -37,7 +37,7 @@ function setup() {
 
 function draw() {
   if (mouseIsPressed) {
-    strokeWeight(6);
+    strokeWeight(8);
     line(mouseX, mouseY, pmouseX, pmouseY);
   }
 }
@@ -65,7 +65,10 @@ function gotResults(err, results) {
   }
 
   guess = results[0].label;
-  confidence = nf(100 * results[0].confidence, 2, 0);
+  confidence = nf(100 * results[0].confidence, 2, 1);
 
+  document.getElementById(
+    "result"
+  ).innerText = `Guess: ${guess} with ${confidence}% of confidence`;
   classifyImage();
 }

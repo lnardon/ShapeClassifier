@@ -19,6 +19,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #06090f;
 }
 
 .container {
@@ -27,4 +28,54 @@ body {
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  color: #fafafa;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-size: 4rem;
+  line-height: 4.25rem;
+  font-weight: bold;
+}
+
+.subtitle {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 1.125rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  width: 90%;
+  opacity: 0.7;
+}
+
+#result {
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+#p5Canvas {
+  margin-bottom: 2rem;
+}
+
+#defaultCanvas0 {
+  border-radius: 0.5rem;
+}
+
+#deleteBtn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0.25rem 1rem;
+  border: 2px solid #f27503;
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 200px;
+  color: #f27503;
+  border-radius: 0.25rem;
 }
