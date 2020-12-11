@@ -1,33 +1,50 @@
+// Global variables
 let shapeClassifier;
 let canvas;
-let resultsDiv;
 let inputImage;
 let clearButton;
+let guess;
+let confidence;
 
+// P5.js functions
 function setup() {
+  // Canvas setup
   canvas = createCanvas(400, 400);
-  let options = {
+  canvas.parent("p5Canvas");
+  background(255);
+
+  // Clear btn
+  clearButton = document.getElementById("deleteBtn");
+  clearButton.addEventListener("click", () => {
+    background(255);
+  });
+
+  // ML Setup
+  const options = {
     inputs: [64, 64, 4],
     task: "imageClassification",
   };
-  shapeClassifier = ml5.neuralNetwork(options);
   const modelDetails = {
     model: "model/model.json",
     metadata: "model/model_meta.json",
     weights: "model/modelweights.bin",
   };
-  background(255);
-  clearButton = createButton("clear");
-  clearButton.mousePressed(function () {
-    background(255);
-  });
-  resultsDiv = createDiv("loading model");
+
+  shapeClassifier = ml5.neuralNetwork(options);
   inputImage = createGraphics(64, 64);
   shapeClassifier.load(modelDetails, modelLoaded);
 }
 
+function draw() {
+  if (mouseIsPressed) {
+    strokeWeight(6);
+    line(mouseX, mouseY, pmouseX, pmouseY);
+  }
+}
+
+// Helper functions
 function modelLoaded() {
-  console.log("model ready!");
+  console.log("Ready!");
   classifyImage();
 }
 
@@ -47,23 +64,8 @@ function gotResults(err, results) {
     return;
   }
 
-  let label = results[0].label;
-  let confidence = nf(100 * results[0].confidence, 2, 0);
-
-  resultsDiv.html(`${label} ${confidence}%`);
+  guess = results[0].label;
+  confidence = nf(100 * results[0].confidence, 2, 0);
 
   classifyImage();
-}
-
-function draw() {
-  if (mouseIsPressed) {
-    strokeWeight(8);
-    line(mouseX, mouseY, pmouseX, pmouseY);
-  }
-
-  // stroke(0);
-  // noFill();
-  // strokeWeight(4);
-  // rectMode(CENTER);
-  // rect(width/2, height/2, 40);
 }
